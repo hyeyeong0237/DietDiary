@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/date_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thu Mar 12 11:56 EST 2021"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/white"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="5dp">
+
+            <ImageView
+                android:id="@+id/diet_image"
+                android:layout_width="90dp"
+                android:layout_height="80dp"
+                android:scaleType="centerInside"
+                android:cropToPadding="true"
+                android:background="@color/cardview_dark_background"/>
+
+            <ImageButton
+                android:id="@+id/diet_imageButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/camera"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Weight : "
+                    android:textAlignment="center"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:id="@+id/diet_weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:inputType="numberDecimal"
+                    style="?android:listSeparatorTextViewStyle"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Kg "
+                    android:textAlignment="textStart"
+                    android:layout_weight="1"
+                    tools:ignore="RtlCompat" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/water_plusButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/water_plus"/>
+                <TextView
+                    android:id="@+id/water_cups"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="0 Cups"
+                    android:textAlignment="center"
+                    android:drawableTop="@drawable/water"/>
+
+                <ImageButton
+                    android:id="@+id/water_minusButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/water_minus"/>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_marginEnd="2dp"
+            android:layout_weight="1"
+            android:background="@color/beige"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MEAL"
+                android:textStyle="bold"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/diet_meal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="58dp"
+            android:layout_height="200dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:background="@color/beige">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EXERCISE"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+            <EditText
+                android:id="@+id/diet_exercise"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/MoodGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/Mood1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/smile"
+            android:text="smile"
+            android:textAlignment="center"/>
+
+        <RadioButton
+            android:id="@+id/Mood2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/smile"
+            android:text="sad"
+            android:textAlignment="center"
+            android:button="@null"/>
+        <RadioButton
+            android:id="@+id/Mood3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/smile"
+            android:text="angry"
+            android:textAlignment="center"
+            android:button="@null"/>
+        <RadioButton
+            android:id="@+id/Mood4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/smile"
+            android:layout_weight="1"
+            android:text="shy"
+            android:textAlignment="center"
+            android:button="@null"/>
+        <RadioButton
+            android:id="@+id/Mood5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/smile"
+            android:layout_weight="1"
+            android:text="nervous"
+            android:textAlignment="center"
+            android:button="@null"/>
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/report_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="REPORT"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/black"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:text = "SAVE"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/black"/>
+
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Delete"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/black"/>
+
+    </LinearLayout>
+</LinearLayout>
