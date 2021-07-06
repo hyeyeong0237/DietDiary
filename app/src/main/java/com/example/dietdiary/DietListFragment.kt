@@ -47,7 +47,7 @@ class DietListFragment : Fragment() {
         dietRecyclerView.adapter = adapter
     }
 
-    private inner class DietHolder(view : View) : RecyclerView.ViewHolder(view){
+    private inner class DietHolder(view : View) : RecyclerView.ViewHolder(view), View.OnClickListener{
 
         private lateinit var diet : Diet
 
@@ -56,6 +56,10 @@ class DietListFragment : Fragment() {
         private val waterTextView : TextView = itemView.findViewById(R.id.water_cups)
         private val MoodImage : ImageView = itemView.findViewById(R.id.diet_mood)
 
+        init {
+            itemView.setOnClickListener(this)
+        }
+
         fun bind(diet : Diet){
             this.diet = diet
             val weight = diet.weight.toString()
@@ -63,7 +67,19 @@ class DietListFragment : Fragment() {
             val cups = diet.water.toString()
             waterTextView.setText("$cups CUPS")
             dateTextView.text = DateFormat.getInstance().format(diet.date)
-            MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.smile))
+
+            when(diet.Mood){
+                1 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.smile))
+                2 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.water))
+                3 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.camera))
+                4 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.water_minus))
+                5 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.water_plus))
+            }
+
+        }
+
+        override fun onClick(v: View?) {
+
         }
 
 
