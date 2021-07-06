@@ -1,19 +1,31 @@
 package com.example.dietdiary
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.lifecycle.Observer
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import java.util.*
 
 private const val DIALOG_DATE = "DialogDate"
 private const val REQUEST_DATE = 0
+private const val ARG_DIET_ID = "diet_Id"
+private const val DATE_FORMAT = "yyyy년 M월 d일, E요일"
 
 class DietFragment : Fragment(), DatePickerFragment.Callbacks {
+
+    interface Callbacks{
+        fun popCurrentFragment()
+    }
+    private var callbacks : Callbacks? = null
 
     private lateinit var diet : Diet
     private lateinit var weight : EditText
@@ -23,13 +35,30 @@ class DietFragment : Fragment(), DatePickerFragment.Callbacks {
     private lateinit var water : TextView
     private lateinit var waterPlusButton : ImageButton
     private lateinit var waterMinusButton : ImageButton
+    private lateinit var saveButton: Button
+    private lateinit var deleteButton: Button
+    private lateinit var reportButton: Button
     private lateinit var MoodGroup : RadioGroup
+    private val dietDetailViewModel : DietDetailViewModel by lazy {
+        ViewModelProvider(this).get(DietDetailViewModel::class.java)
+    }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callbacks = context as Callbacks?
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callbacks = null
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         diet = Diet()
+        val dietID : UUID = arguments?.getSerializable(ARG_DIET_ID) as UUID
+        dietDetailViewModel.loadDiet(dietID)
     }
 
     override fun onCreateView(
@@ -46,11 +75,26 @@ class DietFragment : Fragment(), DatePickerFragment.Callbacks {
         water = view.findViewById(R.id.water_cups) as TextView
         waterPlusButton = view.findViewById(R.id.water_plusButton) as ImageButton
         waterMinusButton = view.findViewById(R.id.water_minusButton) as ImageButton
+        saveButton = view.findViewById(R.id.save_button) as Button
+        deleteButton = view.findViewById(R.id.delete_button) as Button
+        reportButton = view.findViewById(R.id.report_button) as Button
         MoodGroup = view.findViewById(R.id.MoodGroup) as RadioGroup
 
-        updateUI()
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        dietDetailViewModel.dietLiveData.observe(
+            viewLifecycleOwner,
+            Observer { diet ->
+                diet?.let {
+                    this.diet = diet
+                    updateUI()
+                }
+            }
+        )
     }
 
     override fun onStart() {
@@ -69,7 +113,11 @@ class DietFragment : Fragment(), DatePickerFragment.Callbacks {
             }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                val weightText = s.toString()
-                diet.weight = weightText.toDouble()
+                if(weightText.isEmpty()){
+                    diet.weight =0.0
+                }else{
+                    diet.weight = weightText.toDouble()
+                }
             }
             override fun afterTextChanged(s: Editable?) {
             }
@@ -106,13 +154,13 @@ class DietFragment : Fragment(), DatePickerFragment.Callbacks {
         waterPlusButton.apply {
             setOnClickListener {
                 val watercup = ++diet.water
-                water.setText("$watercup Cups")
+                water.setText("$watercup CUPS")
             }
         }
         waterMinusButton.apply {
             setOnClickListener {
                 val watercup = --diet.water
-                water.setText("$watercup Cups")
+                water.setText("$watercup CUPS")
             }
         }
 
@@ -130,21 +178,80 @@ class DietFragment : Fragment(), DatePickerFragment.Callbacks {
             }
         }
 
+        reportButton.setOnClickListener {
+            Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_TEXT, getDietReport())
+                putExtra(Intent.EXTRA_SUBJECT, R.string.dietReport_subject)
+            }.also { intent ->
+                val chooserIntent = Intent.createChooser(intent, "보고서 전송")
+                startActivity(chooserIntent)
+
+            }
+        }
+        saveButton.apply {
+            setOnClickListener {
+                dietDetailViewModel.saveDiet(diet)
+                Toast.makeText(requireContext(),"저장되었습니다", Toast.LENGTH_SHORT ).show()
+                callbacks?.popCurrentFragment()
+            }
+        }
+
+        deleteButton.apply {
+            setOnClickListener {
+                dietDetailViewModel.deleteDiet(diet)
+                Toast.makeText(requireContext(),"삭제되었습니다", Toast.LENGTH_SHORT ).show()
+                callbacks?.popCurrentFragment()
+           }
+        }
+
     }
+
 
     override fun onDateSelected(date: Date) {
         diet.date = date
         updateUI()
     }
 
+    private fun getDietReport(): String{
+        val weightString = getString(R.string.weightReport, diet.weight.toString())
+        val dateString = DateFormat.format(DATE_FORMAT, diet.date).toString()
+        val waterString = getString(R.string.waterReport, diet.water)
+        val mealString = getString(R.string.mealReport, diet.Meal)
+        val exerciseString = getString(R.string.exerciseReport, diet.Exercise)
+
+        return getString(R.string.dietReport, dateString, mealString, waterString, exerciseString, weightString)
+    }
+
     private fun updateUI(){
-        val calendar = Calendar.getInstance()
-        calendar.time = diet.date
-        val Year = calendar.get(Calendar.YEAR)
-        calendar.add(Calendar.MONTH, 1)
-        val Month = calendar.get(Calendar.MONTH)
-        val Day = calendar.get(Calendar.DAY_OF_MONTH)
-        dateButton.setText("$Year. $Month. $Day")
+
+        dateButton.setText(DateFormat.format(DATE_FORMAT, diet.date).toString())
+        weight.setText(diet.weight.toString())
+        water.setText("${diet.water} CUPS")
+        meal.setText(diet.Meal)
+        exercise.setText(diet.Exercise)
+        when(diet.Mood){
+            1->MoodGroup.check(R.id.Mood1)
+            2->MoodGroup.check(R.id.Mood2)
+            3->MoodGroup.check(R.id.Mood3)
+            4->MoodGroup.check(R.id.Mood4)
+            5->MoodGroup.check(R.id.Mood5)
+
+        }
+
+
+    }
+
+    companion object {
+        fun newInstance(dietID: UUID): DietFragment {
+            val args = Bundle().apply {
+                putSerializable(ARG_DIET_ID, dietID)
+            }
+
+            return DietFragment().apply {
+                arguments = args
+            }
+        }
     }
 
 }

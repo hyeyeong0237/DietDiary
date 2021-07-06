@@ -181,7 +181,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
-            android:drawableTop="@drawable/smile"
+            android:drawableTop="@drawable/mood_button_sector"
             android:text="smile"
             android:textAlignment="center"/>
 
@@ -190,7 +190,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@drawable/smile"
+            android:drawableTop="@drawable/mood_button_sector"
             android:text="sad"
             android:textAlignment="center"
             android:button="@null"/>
@@ -199,7 +199,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@drawable/smile"
+            android:drawableTop="@drawable/mood_button_sector"
             android:text="angry"
             android:textAlignment="center"
             android:button="@null"/>
@@ -207,7 +207,7 @@
             android:id="@+id/Mood4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/smile"
+            android:drawableTop="@drawable/mood_button_sector"
             android:layout_weight="1"
             android:text="shy"
             android:textAlignment="center"
@@ -216,7 +216,7 @@
             android:id="@+id/Mood5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/smile"
+            android:drawableTop="@drawable/mood_button_sector"
             android:layout_weight="1"
             android:text="nervous"
             android:textAlignment="center"

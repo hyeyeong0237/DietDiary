@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">DietDiary</string>
+    <string name = "dietReport_subject">다이어트 보고서</string>
+    <string name = "dietReport">%1$s에 %2$s을 먹고 %3$s을 마시고 %4$s을 했음, 그리고 %5$s임</string>
+    <string name = "weightReport">몸무게는 %s kg</string>
+    <string name = "waterReport">물은 %d 잔</string>
+    <string name = "mealReport">음식은 %s</string>
+    <string name = "exerciseReport">운동은 %s</string>
 </resources>

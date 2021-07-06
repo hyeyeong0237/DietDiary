@@ -1,6 +1,9 @@
 package com.example.dietdiary
 
+import android.content.Context
 import android.os.Bundle
+import androidx.lifecycle.Observer
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,20 +14,33 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.DateFormat
 import java.util.*
 
 class DietListFragment : Fragment() {
 
     private lateinit var dietRecyclerView: RecyclerView
-    private var adapter : DietAdapter ? = null
-
+    private lateinit var fab : FloatingActionButton
+    private var adapter : DietAdapter ? = DietAdapter(emptyList())
     private val dietListViewModel : DietListViewModel by lazy {
         ViewModelProvider(this).get(DietListViewModel::class.java)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    interface Callbacks {
+        fun onDietSelected(dietId: UUID)
+    }
+
+    private var callbacks: Callbacks? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callbacks = context as Callbacks?
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callbacks = null
     }
 
     override fun onCreateView(
@@ -34,18 +50,45 @@ class DietListFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_diet_list, container, false)
         dietRecyclerView = view.findViewById(R.id.diet_recycler_view) as RecyclerView
+        fab = view.findViewById(R.id.fab) as FloatingActionButton
         dietRecyclerView.layoutManager = LinearLayoutManager(context)
+        dietRecyclerView.adapter = adapter
 
-        updateUI()
+
 
         return view
     }
 
-    private fun updateUI(){
-        val diets = dietListViewModel.dietList
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        dietListViewModel.dietListLiveData.observe(
+            viewLifecycleOwner,
+            Observer{ diets ->
+                diets?.let {
+                    updateUI(diets)
+                }
+            }
+        )
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        fab.apply {
+            setOnClickListener {
+                val diet = Diet()
+                dietListViewModel.addDiet(diet)
+                callbacks?.onDietSelected(diet.id)
+            }
+        }
+    }
+
+    private fun updateUI(diets : List<Diet>){
+        Collections.reverse(diets)
         adapter = DietAdapter(diets)
         dietRecyclerView.adapter = adapter
     }
+
 
     private inner class DietHolder(view : View) : RecyclerView.ViewHolder(view), View.OnClickListener{
 
@@ -79,6 +122,8 @@ class DietListFragment : Fragment() {
         }
 
         override fun onClick(v: View?) {
+
+            callbacks?.onDietSelected(diet.id)
 
         }
 

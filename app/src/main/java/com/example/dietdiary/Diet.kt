@@ -1,9 +1,12 @@
 package com.example.dietdiary
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.util.*
 
+@Entity
 data class Diet(
-    val id: UUID = UUID.randomUUID(),
+    @PrimaryKey var id: UUID = UUID.randomUUID(),
     var date: Date = Date(),
     var weight: Double = 0.0,
     var water : Int = 0,
