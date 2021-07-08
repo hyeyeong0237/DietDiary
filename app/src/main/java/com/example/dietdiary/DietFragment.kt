@@ -2,7 +2,11 @@ package com.example.dietdiary
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.text.format.DateFormat
@@ -10,13 +14,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import java.io.File
 import java.util.*
 
 private const val DIALOG_DATE = "DialogDate"
 private const val REQUEST_DATE = 0
+private const val REQUEST_PHOTO = 1
 private const val ARG_DIET_ID = "diet_Id"
 private const val DATE_FORMAT = "yyyy년 M월 d일, E요일"
 
@@ -39,6 +46,10 @@ class DietFragment : Fragment(), DatePickerFragment.Callbacks {
     private lateinit var deleteButton: Button
     private lateinit var reportButton: Button
     private lateinit var MoodGroup : RadioGroup
+    private lateinit var photoButton : ImageButton
+    private lateinit var photoView: ImageView
+    private lateinit var photoFile : File
+    private lateinit var photoUri: Uri
     private val dietDetailViewModel : DietDetailViewModel by lazy {
         ViewModelProvider(this).get(DietDetailViewModel::class.java)
     }
@@ -51,6 +62,7 @@ class DietFragment : Fragment(), DatePickerFragment.Callbacks {
     override fun onDetach() {
         super.onDetach()
         callbacks = null
+        requireActivity().revokeUriPermission(photoUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
     }
 
 
@@ -79,6 +91,8 @@ class DietFragment : Fragment(), DatePickerFragment.Callbacks {
         deleteButton = view.findViewById(R.id.delete_button) as Button
         reportButton = view.findViewById(R.id.report_button) as Button
         MoodGroup = view.findViewById(R.id.MoodGroup) as RadioGroup
+        photoButton = view.findViewById(R.id.diet_imageButton) as ImageButton
+        photoView = view.findViewById(R.id.diet_image) as ImageView
 
 
         return view
@@ -91,6 +105,8 @@ class DietFragment : Fragment(), DatePickerFragment.Callbacks {
             Observer { diet ->
                 diet?.let {
                     this.diet = diet
+                    photoFile = dietDetailViewModel.getPhotoFile(diet)
+                    photoUri = FileProvider.getUriForFile(requireContext(), "com.example.dietdiary.fileprovider", photoFile)
                     updateUI()
                 }
             }
@@ -99,6 +115,27 @@ class DietFragment : Fragment(), DatePickerFragment.Callbacks {
 
     override fun onStart() {
         super.onStart()
+
+        photoButton.apply {
+            val packageManager: PackageManager = requireActivity().packageManager
+            val captureImage = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            val resolvedActivity : ResolveInfo? = packageManager.resolveActivity(captureImage, PackageManager.MATCH_DEFAULT_ONLY)
+            if(resolvedActivity == null){
+                isEnabled = false
+            }
+
+            setOnClickListener {
+                captureImage.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
+
+                val cameraActivities : List<ResolveInfo> = packageManager.queryIntentActivities(captureImage, PackageManager.MATCH_DEFAULT_ONLY)
+
+                for(camerActivity in cameraActivities){
+                    requireActivity().grantUriPermission(camerActivity.activityInfo.packageName,photoUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                }
+                startActivityForResult(captureImage, REQUEST_PHOTO)
+
+            }
+        }
 
 
         dateButton.setOnClickListener {
@@ -238,9 +275,30 @@ class DietFragment : Fragment(), DatePickerFragment.Callbacks {
             5->MoodGroup.check(R.id.Mood5)
 
         }
+        updatePhotoView()
 
 
     }
+
+    private fun updatePhotoView(){
+        if(photoFile.exists()){
+            val bitmap = getScaledBitmap(photoFile.path, requireActivity())
+            photoView.setImageBitmap(bitmap)
+        }else{
+            photoView.setImageDrawable(null)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when{
+            requestCode == REQUEST_PHOTO -> {
+                requireActivity().revokeUriPermission(photoUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                updatePhotoView()
+            }
+        }
+    }
+
+
 
     companion object {
         fun newInstance(dietID: UUID): DietFragment {

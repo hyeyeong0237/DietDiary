@@ -14,4 +14,5 @@ data class Diet(
     var Exercise: String = "",
     var Mood : Int = 0
 ) {
+    val photoFileName get() = "IMG_$id.jpg"
 }

@@ -112,11 +112,11 @@ class DietListFragment : Fragment() {
             dateTextView.text = DateFormat.getInstance().format(diet.date)
 
             when(diet.Mood){
-                1 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.smile))
-                2 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.water))
-                3 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.camera))
-                4 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.water_minus))
-                5 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.water_plus))
+                1 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.happy_pressed))
+                2 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.good_pressed))
+                3 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.average_pressed))
+                4 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.poor_pressed))
+                5 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.worst_pressed))
             }
 
         }

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.Room
 import com.example.dietdiary.database.DietDatabase
+import java.io.File
 import java.lang.IllegalStateException
 import java.util.*
 import java.util.concurrent.Executors
@@ -22,6 +23,7 @@ class DietRepository private constructor(context: Context){
 
     private val dietDao = database.dietDao()
     private val executor = Executors.newSingleThreadExecutor()
+    private val filesDir = context.applicationContext.filesDir
 
     fun getDiets() : LiveData<List<Diet>> = dietDao.getDiets()
     fun getDiet(id: UUID) : LiveData<Diet?> = dietDao.getDiet(id)
@@ -36,6 +38,9 @@ class DietRepository private constructor(context: Context){
             dietDao.addDiet(diet)
         }
     }
+
+    fun getPhotoFile(diet: Diet) : File = File(filesDir, diet.photoFileName)
+    
     fun deleteDiet(diet: Diet) {
         executor.execute {
             dietDao.deleteDiet(diet)

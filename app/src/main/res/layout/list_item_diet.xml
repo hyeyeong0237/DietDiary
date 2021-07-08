@@ -19,7 +19,8 @@
             android:id="@+id/diet_mood"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/smile" />
+            android:padding="10dp"
+            android:src="@drawable/happy_pressed" />
 
         <LinearLayout
             android:layout_width="match_parent"

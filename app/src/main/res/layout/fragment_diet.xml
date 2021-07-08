@@ -26,8 +26,8 @@
 
             <ImageView
                 android:id="@+id/diet_image"
-                android:layout_width="90dp"
-                android:layout_height="80dp"
+                android:layout_width="85dp"
+                android:layout_height="95dp"
                 android:scaleType="centerInside"
                 android:cropToPadding="true"
                 android:background="@color/cardview_dark_background"/>
@@ -99,7 +99,7 @@
                     android:layout_weight="1"
                     android:text="0 Cups"
                     android:textAlignment="center"
-                    android:drawableTop="@drawable/water"/>
+                    android:drawableTop="@drawable/water_icon"/>
 
                 <ImageButton
                     android:id="@+id/water_minusButton"
@@ -181,8 +181,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
-            android:drawableTop="@drawable/mood_button_sector"
-            android:text="smile"
+            android:drawableTop="@drawable/happy_icon_sector"
+            android:text="happy"
             android:textAlignment="center"/>
 
         <RadioButton
@@ -190,8 +190,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@drawable/mood_button_sector"
-            android:text="sad"
+            android:drawableTop="@drawable/good_icon_sector"
+            android:text="good"
             android:textAlignment="center"
             android:button="@null"/>
         <RadioButton
@@ -199,26 +199,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@drawable/mood_button_sector"
-            android:text="angry"
+            android:drawableTop="@drawable/average_icon_sector"
+            android:text="average"
             android:textAlignment="center"
             android:button="@null"/>
         <RadioButton
             android:id="@+id/Mood4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/mood_button_sector"
+            android:drawableTop="@drawable/poor_icon_sector"
             android:layout_weight="1"
-            android:text="shy"
+            android:text="poor"
             android:textAlignment="center"
             android:button="@null"/>
         <RadioButton
             android:id="@+id/Mood5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/mood_button_sector"
+            android:drawableTop="@drawable/worst_icon_sector"
             android:layout_weight="1"
-            android:text="nervous"
+            android:text="worst"
             android:textAlignment="center"
             android:button="@null"/>
 
