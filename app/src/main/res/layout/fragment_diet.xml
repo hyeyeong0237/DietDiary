@@ -99,7 +99,7 @@
                     android:layout_weight="1"
                     android:text="0 Cups"
                     android:textAlignment="center"
-                    android:drawableTop="@drawable/water_icon"/>
+                    android:drawableTop="@drawable/water"/>
 
                 <ImageButton
                     android:id="@+id/water_minusButton"

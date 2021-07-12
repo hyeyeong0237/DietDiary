@@ -3,16 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#AAA8A8">
+
+    <TextView
+        android:id="@+id/taskText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/fonttitle"
+        android:text="소소한 식단 일기"
+        android:padding="10dp"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#F0FFFDFD"
+        android:textColorHint="#6991A3"
+        android:textSize="25sp" />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/diet_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dp"
         android:nestedScrollingEnabled="true" />
-
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -25,7 +43,8 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="35dp"
         android:src="@drawable/add_water"
-        app:backgroundTint="@color/beige"/>
+        app:borderWidth="0dp"
+        app:backgroundTint="#444543" />
 
 
 </RelativeLayout>

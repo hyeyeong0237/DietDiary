@@ -18,6 +18,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.DateFormat
 import java.util.*
 
+
+private const val DATE_FORMAT = "MM.dd.yy"
+
 class DietListFragment : Fragment() {
 
     private lateinit var dietRecyclerView: RecyclerView
@@ -84,7 +87,6 @@ class DietListFragment : Fragment() {
     }
 
     private fun updateUI(diets : List<Diet>){
-        Collections.reverse(diets)
         adapter = DietAdapter(diets)
         dietRecyclerView.adapter = adapter
     }
@@ -97,6 +99,8 @@ class DietListFragment : Fragment() {
         private val weightTextView : TextView = itemView.findViewById(R.id.diet_weight)
         private val dateTextView : TextView = itemView.findViewById(R.id.diet_date)
         private val waterTextView : TextView = itemView.findViewById(R.id.water_cups)
+        private val mealTextView : TextView = itemView.findViewById(R.id.meal_check)
+        private val exerciseTextView : TextView = itemView.findViewById(R.id.exercise_check)
         private val MoodImage : ImageView = itemView.findViewById(R.id.diet_mood)
 
         init {
@@ -109,14 +113,21 @@ class DietListFragment : Fragment() {
             weightTextView.setText("$weight kg")
             val cups = diet.water.toString()
             waterTextView.setText("$cups CUPS")
-            dateTextView.text = DateFormat.getInstance().format(diet.date)
+            dateTextView.text = android.text.format.DateFormat.format(DATE_FORMAT, diet.date).toString()
 
             when(diet.Mood){
-                1 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.happy_pressed))
-                2 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.good_pressed))
-                3 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.average_pressed))
-                4 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.poor_pressed))
-                5 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.worst_pressed))
+                1 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.happy_unpressed))
+                2 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.good_unpressed))
+                3 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.average_unpressed))
+                4 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.poor_unpressed))
+                5 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.worst_unpressed))
+            }
+
+            if(!(diet.Meal.isEmpty())){
+                mealTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.check_24), null);
+            }
+            if(!(diet.Exercise.isEmpty())) {
+                exerciseTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.check_24), null)
             }
 
         }
