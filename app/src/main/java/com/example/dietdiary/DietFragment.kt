@@ -26,6 +26,7 @@ private const val REQUEST_DATE = 0
 private const val REQUEST_PHOTO = 1
 private const val ARG_DIET_ID = "diet_Id"
 private const val DATE_FORMAT = "yyyy년 M월 d일, E요일"
+private const val DIALOG_PICTURE = "DialogPicture"
 
 class DietFragment : Fragment(), DatePickerFragment.Callbacks {
 
@@ -134,6 +135,12 @@ class DietFragment : Fragment(), DatePickerFragment.Callbacks {
                 }
                 startActivityForResult(captureImage, REQUEST_PHOTO)
 
+            }
+        }
+
+        photoView.setOnClickListener {
+            if(photoFile.exists()){
+                PictureDialogFragment.newInstance(photoFile).apply { show(this@DietFragment.parentFragmentManager, DIALOG_PICTURE) }
             }
         }
 
