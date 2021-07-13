@@ -1,9 +1,29 @@
 <resources>
-    <string name="app_name">DietDiary</string>
-    <string name = "dietReport_subject">다이어트 보고서</string>
-    <string name = "dietReport">%1$s에 %2$s을 먹고 %3$s을 마시고 %4$s을 했음, 그리고 %5$s임</string>
-    <string name = "weightReport">몸무게는 %s kg</string>
-    <string name = "waterReport">물은 %d 잔</string>
-    <string name = "mealReport">음식은 %s</string>
-    <string name = "exerciseReport">운동은 %s</string>
+    <string name="app_name">식단일기</string>
+    <string name="dietReport_subject">다이어트 보고서</string>
+    <string name="dietReport">%1$s에 %2$s을 먹고 %3$s을 마시고 %4$s을 했음, 그리고 %5$s임</string>
+    <string name="weightReport">몸무게는 %s kg</string>
+    <string name="waterReport">물은 %d 잔</string>
+    <string name="mealReport">음식은 %s</string>
+    <string name="exerciseReport">운동은 %s</string>
+    <string name="happy">happy</string>
+    <string name="good">good</string>
+    <string name="average">average</string>
+    <string name="poor">poor</string>
+    <string name="worst">worst</string>
+    <string name="REPORT">REPORT</string>
+    <string name="SAVE">SAVE</string>
+    <string name="DELETE">DELETE</string>
+    <string name="MEAL">MEAL</string>
+    <string name="EXERCISE">EXERCISE</string>
+    <string name="WeightUI">Weight :</string>
+    <string name="kgUI">Kg</string>
+    <string name="WaterCups">%d CUPS</string>
+    <string name="Weight">%s Kg</string>
+    <string name="Date">Thu Mar 12 11:56 EST 2021</string>
+    <string name="appTitle">다이어트 일기</string>
+    <string name="meal">식단</string>
+    <string name="exercise">운동</string>
+    <string name="customDate">07.18.21</string>
+
 </resources>

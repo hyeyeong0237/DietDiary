@@ -6,11 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
     android:layout_marginBottom="5dp"
     android:layout_marginTop="5dp"
-    app:cardCornerRadius="8dp">
+    app:cardCornerRadius="10dp">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,60 +20,63 @@
 
         <ImageView
             android:id="@+id/diet_mood"
-            android:layout_width="67dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginStart="16dp"
-            android:padding="10dp"
-            android:src="@drawable/happy_unpressed"
+            android:padding="5dp"
+            android:src="@drawable/happy_icon"
             app:layout_constraintBottom_toTopOf="@+id/diet_date"
             app:layout_constraintEnd_toStartOf="@+id/diet_weight"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/diet_weight"
-            android:layout_width="88dp"
-            android:layout_height="34dp"
-            android:fontFamily="@font/fontdiet"
-            android:text="58.4 kg"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:fontFamily="@font/font_diet"
+            android:text="@string/Weight"
             android:textAlignment="center"
             android:textSize="25sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/water_cups"
-            app:layout_constraintHorizontal_bias="0.488"
+            app:layout_constraintHorizontal_bias="0.184"
             app:layout_constraintStart_toEndOf="@+id/diet_date"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.363"
+            app:layout_constraintVertical_bias="0.486"
             tools:ignore="RtlCompat" />
 
         <TextView
             android:id="@+id/water_cups"
-            android:layout_width="65dp"
-            android:layout_height="40dp"
+            android:layout_width="66dp"
+            android:layout_height="42dp"
             android:layout_gravity="center"
-            android:layout_marginEnd="16dp"
             android:layout_weight="1"
             android:drawableTop="@drawable/water"
-            android:fontFamily="@font/fontdiet"
-            android:text="4 CUPS"
+            android:fontFamily="@font/font_diet"
+            android:text="@string/WaterCups"
             android:textAlignment="center"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.917"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.6"
             tools:ignore="RtlCompat" />
 
         <TextView
             android:id="@+id/diet_date"
-            android:layout_width="69dp"
-            android:layout_height="18dp"
+            android:layout_width="53dp"
+            android:layout_height="17dp"
             android:layout_gravity="center|bottom"
             android:layout_marginStart="16dp"
-            android:fontFamily="@font/fontdiet"
-            android:text="07.18.21"
+            android:fontFamily="@font/font_diet"
+            android:text="@string/customDate"
             android:textAlignment="center"
-            android:textSize="15sp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -81,30 +84,29 @@
             android:id="@+id/meal_check"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/fontdiet"
-            android:text="식단"
+            android:fontFamily="@font/font_diet"
+            android:text="@string/meal"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
-
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.241"
+            app:layout_constraintHorizontal_bias="0.522"
             app:layout_constraintStart_toEndOf="@+id/diet_date"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.932" />
+            app:layout_constraintVertical_bias="0.312" />
 
         <TextView
             android:id="@+id/exercise_check"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/fontdiet"
-            android:text="운동"
+            android:fontFamily="@font/font_diet"
+            android:text="@string/exercise"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.628"
+            app:layout_constraintHorizontal_bias="0.646"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.932" />
+            app:layout_constraintVertical_bias="0.708" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

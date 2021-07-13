@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import java.io.File
 import java.util.*
 
-class DietDetailViewModel() : ViewModel(){
+class DietDetailViewModel : ViewModel(){
 
     private val dietRepository = DietRepository.get()
     private val dietIdLiveData = MutableLiveData<UUID>()

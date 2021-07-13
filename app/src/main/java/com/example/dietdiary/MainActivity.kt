@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import java.util.*
 
-private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity(), DietListFragment.Callbacks, DietFragment.Callbacks {
     override fun onCreate(savedInstanceState: Bundle?) {

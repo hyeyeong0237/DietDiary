@@ -16,9 +16,8 @@ fun getScaledBitmap(path: String, activity: Activity) : Bitmap{
     activity.windowManager.defaultDisplay.getSize(size)
 
     val bitmap = getScaledBitmap(path, size.x, size.y)
-    val rotateBitmap = Bitmap.createBitmap(bitmap, 0,0, bitmap.getWidth(), bitmap.getHeight(), matrix, true)
 
-    return rotateBitmap
+    return Bitmap.createBitmap(bitmap, 0,0, bitmap.getWidth(), bitmap.getHeight(), matrix, true)
 
 }
 
@@ -30,7 +29,7 @@ fun getScaledBitmap(path:String, destWidth: Int, destHeight: Int) : Bitmap{
     val srcWidth = options.outWidth.toFloat()
     val srcHeight = options.outHeight.toFloat()
 
-    var inSamleSize = 1
+    var inSampleSize = 1
     if(srcHeight > destHeight || srcWidth > destWidth){
         val heightScale = srcHeight/destHeight
         val widthScale = srcWidth/destWidth
@@ -40,11 +39,11 @@ fun getScaledBitmap(path:String, destWidth: Int, destHeight: Int) : Bitmap{
         }else{
             widthScale
         }
-        inSamleSize = Math.round(sampleScale)
+        inSampleSize = Math.round(sampleScale)
     }
 
     options = BitmapFactory.Options()
-    options.inSampleSize = inSamleSize
+    options.inSampleSize = inSampleSize
 
     return BitmapFactory.decodeFile(path, options)
 }

@@ -45,7 +45,7 @@ class DietFragment : Fragment(), DatePickerFragment.Callbacks {
     private lateinit var saveButton: Button
     private lateinit var deleteButton: Button
     private lateinit var reportButton: Button
-    private lateinit var MoodGroup : RadioGroup
+    private lateinit var moodGroup : RadioGroup
     private lateinit var photoButton : ImageButton
     private lateinit var photoView: ImageView
     private lateinit var photoFile : File
@@ -90,7 +90,7 @@ class DietFragment : Fragment(), DatePickerFragment.Callbacks {
         saveButton = view.findViewById(R.id.save_button) as Button
         deleteButton = view.findViewById(R.id.delete_button) as Button
         reportButton = view.findViewById(R.id.report_button) as Button
-        MoodGroup = view.findViewById(R.id.MoodGroup) as RadioGroup
+        moodGroup = view.findViewById(R.id.MoodGroup) as RadioGroup
         photoButton = view.findViewById(R.id.diet_imageButton) as ImageButton
         photoView = view.findViewById(R.id.diet_image) as ImageView
 
@@ -129,8 +129,8 @@ class DietFragment : Fragment(), DatePickerFragment.Callbacks {
 
                 val cameraActivities : List<ResolveInfo> = packageManager.queryIntentActivities(captureImage, PackageManager.MATCH_DEFAULT_ONLY)
 
-                for(camerActivity in cameraActivities){
-                    requireActivity().grantUriPermission(camerActivity.activityInfo.packageName,photoUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                for(cameraActivity in cameraActivities){
+                    requireActivity().grantUriPermission(cameraActivity.activityInfo.packageName,photoUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
                 }
                 startActivityForResult(captureImage, REQUEST_PHOTO)
 
@@ -174,7 +174,7 @@ class DietFragment : Fragment(), DatePickerFragment.Callbacks {
         }
         meal.addTextChangedListener(mealWatcher)
 
-        val ExerciseWatcher = object : TextWatcher {
+        val exerciseWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -186,22 +186,20 @@ class DietFragment : Fragment(), DatePickerFragment.Callbacks {
             }
         }
 
-        exercise.addTextChangedListener(ExerciseWatcher)
+        exercise.addTextChangedListener(exerciseWatcher)
 
         waterPlusButton.apply {
             setOnClickListener {
-                val watercup = ++diet.water
-                water.setText("$watercup CUPS")
+                water.setText(getString(R.string.WaterCups, ++diet.water))
             }
         }
         waterMinusButton.apply {
             setOnClickListener {
-                val watercup = --diet.water
-                water.setText("$watercup CUPS")
+                water.setText(getString(R.string.WaterCups, --diet.water))
             }
         }
 
-        MoodGroup.apply{
+        moodGroup.apply{
             setOnCheckedChangeListener { group, checkedId ->
                 when(checkedId){
                     R.id.Mood1 -> diet.Mood = 1
@@ -264,15 +262,15 @@ class DietFragment : Fragment(), DatePickerFragment.Callbacks {
 
         dateButton.setText(DateFormat.format(DATE_FORMAT, diet.date).toString())
         weight.setText(diet.weight.toString())
-        water.setText("${diet.water} CUPS")
+        water.setText(getString(R.string.WaterCups, diet.water))
         meal.setText(diet.Meal)
         exercise.setText(diet.Exercise)
         when(diet.Mood){
-            1->MoodGroup.check(R.id.Mood1)
-            2->MoodGroup.check(R.id.Mood2)
-            3->MoodGroup.check(R.id.Mood3)
-            4->MoodGroup.check(R.id.Mood4)
-            5->MoodGroup.check(R.id.Mood5)
+            1->moodGroup.check(R.id.Mood1)
+            2->moodGroup.check(R.id.Mood2)
+            3->moodGroup.check(R.id.Mood3)
+            4->moodGroup.check(R.id.Mood4)
+            5->moodGroup.check(R.id.Mood5)
 
         }
         updatePhotoView()

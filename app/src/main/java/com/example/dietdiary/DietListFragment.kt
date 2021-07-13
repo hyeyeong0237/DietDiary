@@ -3,19 +3,18 @@ package com.example.dietdiary
 import android.content.Context
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.text.DateFormat
 import java.util.*
 
 
@@ -24,7 +23,7 @@ private const val DATE_FORMAT = "MM.dd.yy"
 class DietListFragment : Fragment() {
 
     private lateinit var dietRecyclerView: RecyclerView
-    private lateinit var fab : FloatingActionButton
+    private lateinit var fab : ImageButton
     private var adapter : DietAdapter ? = DietAdapter(emptyList())
     private val dietListViewModel : DietListViewModel by lazy {
         ViewModelProvider(this).get(DietListViewModel::class.java)
@@ -53,7 +52,7 @@ class DietListFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_diet_list, container, false)
         dietRecyclerView = view.findViewById(R.id.diet_recycler_view) as RecyclerView
-        fab = view.findViewById(R.id.fab) as FloatingActionButton
+        fab = view.findViewById(R.id.fab) as ImageButton
         dietRecyclerView.layoutManager = LinearLayoutManager(context)
         dietRecyclerView.adapter = adapter
 
@@ -101,7 +100,7 @@ class DietListFragment : Fragment() {
         private val waterTextView : TextView = itemView.findViewById(R.id.water_cups)
         private val mealTextView : TextView = itemView.findViewById(R.id.meal_check)
         private val exerciseTextView : TextView = itemView.findViewById(R.id.exercise_check)
-        private val MoodImage : ImageView = itemView.findViewById(R.id.diet_mood)
+        private val moodImage : ImageView = itemView.findViewById(R.id.diet_mood)
 
         init {
             itemView.setOnClickListener(this)
@@ -109,25 +108,23 @@ class DietListFragment : Fragment() {
 
         fun bind(diet : Diet){
             this.diet = diet
-            val weight = diet.weight.toString()
-            weightTextView.setText("$weight kg")
-            val cups = diet.water.toString()
-            waterTextView.setText("$cups CUPS")
+            weightTextView.setText(getString(R.string.Weight, diet.weight.toString()))
+            waterTextView.setText(getString(R.string.WaterCups, diet.water))
             dateTextView.text = android.text.format.DateFormat.format(DATE_FORMAT, diet.date).toString()
 
             when(diet.Mood){
-                1 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.happy_unpressed))
-                2 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.good_unpressed))
-                3 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.average_unpressed))
-                4 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.poor_unpressed))
-                5 -> MoodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.worst_unpressed))
+                1 -> moodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.happy_icon))
+                2 -> moodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.good))
+                3 -> moodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.average))
+                4 -> moodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.poor))
+                5 -> moodImage.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.worst))
             }
 
-            if(!(diet.Meal.isEmpty())){
-                mealTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.check_24), null);
+            if(diet.Meal.isNotEmpty()){
+                mealTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, ResourcesCompat.getDrawable(getResources(),R.drawable.check_24,null), null)
             }
-            if(!(diet.Exercise.isEmpty())) {
-                exerciseTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.check_24), null)
+            if(diet.Exercise.isNotEmpty()) {
+                exerciseTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, ResourcesCompat.getDrawable(getResources(),R.drawable.check_24,null), null)
             }
 
         }

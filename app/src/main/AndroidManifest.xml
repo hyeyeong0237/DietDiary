@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dietdiary">
 
-    <uses-feature android:name="android.hardware.camera2"
-        android:required="false"/>
+    <uses-feature
+        android:name="android.hardware.camera2"
+        android:required="false" />
 
     <application
         android:name=".DietIntentApplication"
@@ -13,22 +14,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DietDiary">
-        <activity android:name=".MainActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".FlashActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
         <provider
-            android:authorities="com.example.dietdiary.fileprovider"
             android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.dietdiary.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/files"/>
-
+                android:resource="@xml/files" />
         </provider>
     </application>
 

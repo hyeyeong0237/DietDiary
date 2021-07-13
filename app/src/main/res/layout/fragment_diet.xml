@@ -9,9 +9,11 @@
         android:id="@+id/date_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Thu Mar 12 11:56 EST 2021"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/font_diet"
+        android:text="@string/Date"
         android:textColor="@color/black"
-        android:backgroundTint="@color/white"/>
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,24 +21,26 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="5dp">
+            android:layout_width="111dp"
+            android:layout_height="174dp"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/diet_image"
-                android:layout_width="85dp"
-                android:layout_height="95dp"
-                android:scaleType="centerInside"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:background="@color/cardview_dark_background"
                 android:cropToPadding="true"
-                android:background="@color/cardview_dark_background"/>
+                android:scaleType="centerInside" />
 
             <ImageButton
                 android:id="@+id/diet_imageButton"
+                style="@style/Widget.AppCompat.ImageButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/camera"/>
+                android:backgroundTint="#D8D4D4"
+                android:src="@drawable/camera" />
 
         </LinearLayout>
 
@@ -55,9 +59,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Weight : "
+                    android:fontFamily="@font/font_diet"
+                    android:layout_weight="1"
+                    android:text="@string/WeightUI"
                     android:textAlignment="center"
-                    android:layout_weight="1"/>
+                    android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/diet_weight"
@@ -66,15 +72,18 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:inputType="numberDecimal"
+                    android:autofillHints="@android:string/cut"
                     style="?android:listSeparatorTextViewStyle"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Kg "
-                    android:textAlignment="textStart"
                     android:layout_weight="1"
+                    android:fontFamily="@font/font_diet"
+                    android:text="@string/kgUI"
+                    android:textAlignment="textStart"
+                    android:textSize="16sp"
                     tools:ignore="RtlCompat" />
 
             </LinearLayout>
@@ -90,24 +99,27 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/water_plus"/>
+                    android:src="@drawable/water_plus" />
+
                 <TextView
                     android:id="@+id/water_cups"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="0 Cups"
+                    android:drawableTop="@drawable/water"
+                    android:fontFamily="@font/font_diet"
+                    android:text="@string/WaterCups"
                     android:textAlignment="center"
-                    android:drawableTop="@drawable/water"/>
+                    android:textSize="16sp" />
 
                 <ImageButton
                     android:id="@+id/water_minusButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:layout_height="match_parent"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/water_minus"/>
+                    android:src="@drawable/water_minus" />
 
 
             </LinearLayout>
@@ -120,10 +132,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="200dp"
             android:layout_marginEnd="2dp"
             android:layout_weight="1"
@@ -133,36 +146,44 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="MEAL"
-                android:textStyle="bold"
-                android:textSize="20dp" />
+                android:fontFamily="@font/font_diet"
+                android:text="@string/MEAL"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/diet_meal"
+                style="@style/Widget.AppCompat.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="15sp" />
+                android:fontFamily="@font/font_diet"
+                android:textSize="15sp"
+                android:inputType="text" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="58dp"
+            android:layout_width="0dp"
             android:layout_height="200dp"
             android:orientation="vertical"
             android:layout_weight="1"
             android:background="@color/beige">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="EXERCISE"
-                android:textStyle="bold"
-                android:textSize="20dp"/>
+                android:fontFamily="@font/font_diet"
+                android:text="@string/EXERCISE"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/diet_exercise"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"/>
+                android:fontFamily="@font/font_diet"
+                android:textSize="15sp"
+                android:inputType="text" />
 
         </LinearLayout>
 
@@ -181,46 +202,59 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
-            android:drawableTop="@drawable/happy_icon_sector"
-            android:text="happy"
-            android:textAlignment="center"/>
+            android:drawableTop="@drawable/happy_icon"
+            android:fontFamily="@font/font_diet"
+            android:text="@string/happy"
+            android:textAlignment="center"
+            android:textSize="16sp" />
 
         <RadioButton
             android:id="@+id/Mood2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@drawable/good_icon_sector"
-            android:text="good"
+            android:button="@null"
+            android:drawableTop="@drawable/good"
+            android:fontFamily="@font/font_diet"
+            android:text="@string/good"
             android:textAlignment="center"
-            android:button="@null"/>
+            android:textSize="16sp" />
+
         <RadioButton
             android:id="@+id/Mood3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@drawable/average_icon_sector"
-            android:text="average"
+            android:button="@null"
+            android:drawableTop="@drawable/average"
+            android:fontFamily="@font/font_diet"
+            android:text="@string/average"
             android:textAlignment="center"
-            android:button="@null"/>
+            android:textSize="16sp" />
+
         <RadioButton
             android:id="@+id/Mood4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/poor_icon_sector"
             android:layout_weight="1"
-            android:text="poor"
+            android:button="@null"
+            android:drawableTop="@drawable/poor"
+            android:fontFamily="@font/font_diet"
+            android:text="@string/poor"
             android:textAlignment="center"
-            android:button="@null"/>
+            android:textSize="16sp" />
+
         <RadioButton
             android:id="@+id/Mood5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/worst_icon_sector"
             android:layout_weight="1"
-            android:text="worst"
+            android:button="@null"
+            android:drawableTop="@drawable/worst"
+            android:fontFamily="@font/font_diet"
+            android:text="@string/worst"
             android:textAlignment="center"
-            android:button="@null"/>
+            android:textSize="16sp" />
 
     </RadioGroup>
 
@@ -228,10 +262,11 @@
         android:id="@+id/report_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="REPORT"
+        android:backgroundTint="#494343"
+        android:fontFamily="@font/font_diet"
+        android:text="@string/REPORT"
         android:textColor="@color/white"
-        android:backgroundTint="@color/black"
-        />
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -242,20 +277,24 @@
             android:id="@+id/save_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="2dp"
+            android:layout_marginEnd="2dp"
             android:layout_weight="1"
-            android:text = "SAVE"
+            android:backgroundTint="#494343"
+            android:fontFamily="@font/font_diet"
+            android:text="@string/SAVE"
             android:textColor="@color/white"
-            android:backgroundTint="@color/black"/>
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/delete_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Delete"
+            android:backgroundTint="#494343"
+            android:fontFamily="@font/font_diet"
+            android:text="@string/DELETE"
             android:textColor="@color/white"
-            android:backgroundTint="@color/black"/>
+            android:textSize="20sp" />
 
     </LinearLayout>
 </LinearLayout>
